@@ -23,6 +23,15 @@ WHERE Customer.CustomerId == Invoice.CustomerId AND Country == "Brazil";
 
 --3.2. Une requête mieux adaptée (INNER JOIN) après correction
 
+select FirstName || ' ' || LastName AS FullName, 
+       InvoiceId, 
+	   InvoiceDate, 
+	   BillingCountry
+FROM Customer
+INNER JOIN Invoice
+ON Customer.CustomerId == Invoice.CustomerId
+WHERE Country == "Brazil";
+
 --4. Requête affichant uniquement les employés qui sont des Agents de Vente
 
 select *
