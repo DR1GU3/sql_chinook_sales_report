@@ -42,3 +42,13 @@ WHERE Title = "Sales Support Agent";
 
 select DISTINCT BillingCountry
 FROM Invoice;
+
+--6. Requête affichant les factures associées à chaque agent de vente.
+
+SELECT Employee.FirstName || ' ' || Employee.LastName AS FullName,
+	   Invoice.*
+FROM Invoice
+INNER JOIN Customer ON Invoice.CustomerId = Customer.CustomerId
+INNER JOIN Employee ON Customer.SupportRepId = Employee.EmployeeId;
+
+--7. 
