@@ -51,4 +51,21 @@ FROM Invoice
 INNER JOIN Customer ON Invoice.CustomerId = Customer.CustomerId
 INNER JOIN Employee ON Customer.SupportRepId = Employee.EmployeeId;
 
---7. 
+--7. Requête affichant le total de chaque facture, le nom du client, le pays et le nom de l'agent de vente
+
+SELECT Customer.FirstName || ' ' || Customer.LastName AS Customer_FullName,
+	   Customer.Country,
+	   Employee.FirstName || ' ' || Employee.LastName AS SalesSuppAgent_FullName,
+	   Invoice.Total
+FROM Invoice
+INNER JOIN Customer ON Invoice.CustomerId = Customer.CustomerId
+INNER JOIN Employee ON Customer.SupportRepId = Employee.EmployeeId;
+
+--8. Requête affichant le nombre de factures en 2021 et 2023 et les montants totaux des ventes pour chacune de ces années
+
+SELECT strftime('%Y', InvoiceDate) AS Year,
+       COUNT(*) AS NbInvoice,
+	   SUM(Invoice.Total) AS TotalSales
+FROM Invoice 
+WHERE strftime('%Y', InvoiceDate) IN ('2021' , '2023')
+GROUP BY Year;
