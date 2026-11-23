@@ -69,3 +69,23 @@ SELECT strftime('%Y', InvoiceDate) AS Year,
 FROM Invoice 
 WHERE strftime('%Y', InvoiceDate) IN ('2021' , '2023')
 GROUP BY Year;
+
+--9. Requête affichant le nombre nombre d'articles (line items) pour l'ID de facture 37
+
+SELECT COUNT(*) AS NbLinesItem
+FROM InvoiceLine
+WHERE InvoiceId = 37;
+
+--10. Requête affichant le nombre d'articles (line items) pour chaque facture
+
+SELECT 	InvoiceId,
+        COUNT(*) AS NbLinesItem
+FROM InvoiceLine
+GROUP BY InvoiceId;
+
+--11. Requête incluant le nom du morceau pour chaque ligne de facture
+
+SELECT 	InvoiceLine.*,
+		Track.Name AS NomMorceau
+FROM InvoiceLine
+INNER JOIN Track ON InvoiceLine.TrackId = Track.TrackId;
